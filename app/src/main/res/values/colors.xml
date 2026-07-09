@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="screen_background">#FF000000</color>
+
+    <color name="title_text">#FF6A1B9A</color>
+    <color name="title_shadow">#FFFFFFFF</color>
+
+    <color name="game_area_bg">#FF3B4A38</color>
+    <color name="game_area_border">#FF2E7D32</color>
+    <color name="grid_line">#40A5D6A7</color>
+
+    <color name="snake_body">#FF4C8C3F</color>
+    <color name="snake_head">#FF4C8C3F</color>
+    <color name="snake_tongue">#FFE0847B</color>
+
+    <color name="snake_green_body">#FF4C8C3F</color>
+    <color name="snake_green_head">#FF4C8C3F</color>
+    <color name="snake_blue_body">#FF1E88E5</color>
+    <color name="snake_blue_head">#FF1565C0</color>
+    <color name="snake_orange_body">#FFF57C00</color>
+    <color name="snake_orange_head">#FFE65100</color>
+    <color name="snake_purple_body">#FF7B1FA2</color>
+    <color name="snake_purple_head">#FF4A148C</color>
+    <color name="snake_red_body">#FFD32F2F</color>
+    <color name="snake_red_head">#FFB71C1C</color>
+
+    <color name="snake_gold_body">#FFFFD700</color>
+    <color name="snake_gold_head">#FFB8860B</color>
+
+    <color name="death_flash">#99FF0000</color>
+
+    <color name="food">#FFE53935</color>
+    <color name="food_gold">#FFFFC107</color>
+    <color name="food_stem">#FF6D4C33</color>
+    <color name="food_leaf">#FF66BB6A</color>
+
+    <color name="controls_area_bg">#FFFFF3E0</color>
+    <color name="controls_area_border">#FFEF6C00</color>
+
+    <color name="btn_up">#FF42A5F5</color>
+    <color name="btn_down">#FF42A5F5</color>
+    <color name="btn_left">#FF42A5F5</color>
+    <color name="btn_right">#FF42A5F5</color>
+    <color name="btn_stroke">#FFFFFFFF</color>
+
+    <color name="pause_gray">#FF9E9E9E</color>
+</resources>

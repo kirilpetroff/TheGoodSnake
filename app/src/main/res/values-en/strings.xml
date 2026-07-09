@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Sammy Snake</string>
+    <string name="game_over_text">Game Over</string>
+    <string name="score_format">Score: %d</string>
+    <string name="heart">❤</string>
+
+    <string name="pause_symbol">❚❚</string>
+    <string name="resume_symbol">▶</string>
+    <string name="pause_button_description">Pause</string>
+    <string name="resume_button_description">Resume</string>
+
+    <string name="direction_up">Up</string>
+    <string name="direction_down">Down</string>
+    <string name="direction_left">Left</string>
+    <string name="direction_right">Right</string>
+
+    <string name="arrow_up">▲</string>
+    <string name="arrow_down">▼</string>
+    <string name="arrow_left">◀</string>
+    <string name="arrow_right">▶</string>
+
+    <string name="settings_symbol">⚙</string>
+    <string name="settings_button_description">Settings</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_control_label">Controls</string>
+    <string name="control_buttons">Buttons</string>
+    <string name="control_swipe">Swipe</string>
+    <string name="settings_language_label">Language</string>
+    <string name="language_bulgarian">Български</string>
+    <string name="language_english">English</string>
+    <string name="settings_snake_color_label">Snake color</string>
+    <string name="settings_music_volume_label">Music volume</string>
+    <string name="settings_close">Close</string>
+</resources>
