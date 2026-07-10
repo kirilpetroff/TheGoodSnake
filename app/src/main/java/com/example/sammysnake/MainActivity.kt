@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     private val pointsPerGoldenApple = 500
     private val goldenTailRemoveCount = 4
     private val goldenAppleChanceDenominator = 8 // 1 от 8 ябълки е златна
-    private val minSnakeLengthForGoldenApple = 5 // поне 4 стандартни сегмента извън главата
+    private val minSnakeLengthForGoldenApple = 5 // поне 5 НЕзлатни сегмента, за да се разреши нова златна ябълка
 
     private var moveIntervalMs = startingIntervalMs
     private var intervalBeforeLastTick = startingIntervalMs
@@ -419,7 +419,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /** Златната ябълка маркира сегмента до главата като златен и маха [goldenTailRemoveCount] от опашката. */
+    /** Златната ябълка удължава трайно златния "префикс" зад главата с 1 и маха [goldenTailRemoveCount] от опашката. */
     private fun handleFoodEaten(golden: Boolean) {
         if (golden) {
             snake.applyGoldenBonus(goldenTailRemoveCount)
@@ -464,8 +464,8 @@ class MainActivity : AppCompatActivity() {
                 if (cell !in snake.body) emptyCells.add(cell)
             }
         }
-        val golden = snake.body.size >= minSnakeLengthForGoldenApple &&
-            Random.nextInt(goldenAppleChanceDenominator) == 0
+        val nonGoldenBodySegments = snake.segments.drop(1).count { !it.golden } // без главата
+        val golden = nonGoldenBodySegments >= minSnakeLengthForGoldenApple // ВРЕМЕННО: 100% вероятност за тест
         return Food(emptyCells.random(), golden)
     }
 
