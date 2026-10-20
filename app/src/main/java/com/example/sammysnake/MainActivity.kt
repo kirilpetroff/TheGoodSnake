@@ -1,5 +1,6 @@
 package com.example.sammysnake
 
+import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.media.AudioAttributes
 import android.media.MediaPlayer
@@ -18,12 +19,18 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.random.Random
+
+private const val DPAD_BUTTON_DP = 64f
+private const val DPAD_RADIUS_DP = 60f
+private const val DPAD_MARGIN_DP = 8f
+private const val MIN_DPAD_SCALE = 0.5f
 
 class MainActivity : AppCompatActivity() {
 
@@ -109,9 +116,15 @@ class MainActivity : AppCompatActivity() {
         snakeColorIndex = AppPreferences.getSnakeColorIndex(this)
 
         val root = findViewById<View>(R.id.main)
+        val basePadding = Rect(root.paddingLeft, root.paddingTop, root.paddingRight, root.paddingBottom)
         ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(
+                basePadding.left + systemBars.left,
+                basePadding.top + systemBars.top,
+                basePadding.right + systemBars.right,
+                basePadding.bottom + systemBars.bottom
+            )
             insets
         }
         root.setOnClickListener {
@@ -142,6 +155,9 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.swipeHintRight)
         )
         applyControlType()
+        controlsArea.addOnLayoutChangeListener { _, _, top, _, bottom, _, _, _, _ ->
+            fitDpadToHeight(bottom - top)
+        }
 
         gameGridView.setOnTouchListener(swipeTouchListener)
         controlsArea.setOnTouchListener(swipeTouchListener)
@@ -203,6 +219,27 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> false
+        }
+    }
+
+    /** Smaller screens (e.g. a foldable's narrow cover display) can leave the d-pad less room than it needs, so shrink it to fit. */
+    private fun fitDpadToHeight(areaHeightPx: Int) {
+        val density = resources.displayMetrics.density
+        val neededDp = 2 * DPAD_RADIUS_DP + DPAD_BUTTON_DP
+        val availableDp = areaHeightPx / density - 2 * DPAD_MARGIN_DP
+        val scale = (availableDp / neededDp).coerceIn(MIN_DPAD_SCALE, 1f)
+        val buttonPx = (DPAD_BUTTON_DP * scale * density).toInt()
+        val radiusPx = (DPAD_RADIUS_DP * scale * density).toInt()
+        (dpadButtons + swipeHints).forEach { view ->
+            val params = view.layoutParams as ConstraintLayout.LayoutParams
+            val isButton = view is Button
+            if (params.circleRadius == radiusPx && (!isButton || params.width == buttonPx)) return@forEach
+            params.circleRadius = radiusPx
+            if (isButton) {
+                params.width = buttonPx
+                params.height = buttonPx
+            }
+            view.layoutParams = params
         }
     }
 
